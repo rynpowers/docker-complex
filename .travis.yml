@@ -1,0 +1,18 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t rynpowers/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true rynpowers/react-test npm run test
+
+after_success:
+  - docker build -t rynpowers/complex-client ./client
+  - docker build -t rynpowers/complex-nginx ./nginx
+  - docker build -t rynpowers/complex-server ./server
+  - docker build -t rynpowers/complex-worker ./worker
+
+
+
