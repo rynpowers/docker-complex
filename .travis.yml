@@ -18,3 +18,15 @@ after_success:
   - docker push rynpowers/complex-nginx
   - docker push rynpowers/complex-server
   - docker push rynpowers/complex-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'us-east-1'
+  app: 'docker-complex'
+  env: 'Docker-complex-env'
+  bucket_name: 'elasticbeanstalk-us-east-1-081899196082'
+  bucket_path: 'docker-complex'
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
