@@ -13,6 +13,8 @@ after_success:
   - docker build -t rynpowers/complex-nginx ./nginx
   - docker build -t rynpowers/complex-server ./server
   - docker build -t rynpowers/complex-worker ./worker
-
-
-
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push rynpowers/complex-client
+  - docker push rynpowers/complex-nginx
+  - docker push rynpowers/complex-server
+  - docker push rynpowers/complex-worker
